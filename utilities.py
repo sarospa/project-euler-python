@@ -40,6 +40,14 @@ def is_palindrome(val):
 		if str_val[i] != str_val[-(i + 1)]:
 			return False
 	return True
+	
+def read_to_2d_list(filename, list):
+	with open(filename) as f:
+		for line in f.readlines():
+			dataline = []
+			for num in line.split():
+				dataline.append(int(num))
+			list.append(dataline)
 
 def print_runtime(func):
 	start_time = time.perf_counter()
