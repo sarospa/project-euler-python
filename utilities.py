@@ -40,7 +40,7 @@ def is_palindrome(val):
 		if str_val[i] != str_val[-(i + 1)]:
 			return False
 	return True
-	
+
 def read_to_2d_list(filename, list):
 	with open(filename) as f:
 		for line in f.readlines():
