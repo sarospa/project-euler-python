@@ -1,9 +1,13 @@
 import time
 
-primes = [2]
+primes = []
 
+# n is the number of primes to generate.
 def generate_primes(n):
-	p = primes[len(primes) - 1]
+	if len(primes) == 0:
+		p = 2
+	else:
+		p = primes[len(primes) - 1]
 	count = 0
 	while count < n:
 		is_prime = True
@@ -15,6 +19,17 @@ def generate_primes(n):
 			count = count + 1
 			primes.append(p)
 		p = p + 1
+
+# generates all primes between 1 and n.
+def generate_primes_sieve(n):
+	prime_sieve = [True] * n
+	prime_sieve[0] = False
+	prime_sieve[1] = False
+	for i in range(1, n):
+		if prime_sieve[i]:
+			primes.append(i)
+			for j in range(i, n, i):
+				prime_sieve[j] = False
 
 def is_palindrome(val):
 	str_val = str(val)
