@@ -31,6 +31,9 @@ def generate_primes_sieve(n):
 			for j in range(i, n, i):
 				prime_sieve[j] = False
 
+def triangle(n):
+	return (n * (n + 1)) // 2
+				
 def is_palindrome(val):
 	str_val = str(val)
 	for i in range(0, len(str_val) // 2):
