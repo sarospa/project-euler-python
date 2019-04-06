@@ -1,3 +1,5 @@
+# Solution to https://projecteuler.net/problem=8
+
 import utilities
 
 def main():
