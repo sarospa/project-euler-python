@@ -1,4 +1,5 @@
 import time
+import math
 
 primes = []
 
@@ -40,6 +41,14 @@ def is_palindrome(val):
 		if str_val[i] != str_val[-(i + 1)]:
 			return False
 	return True
+
+def sum_divisors(n):
+	divisors = set()
+	for j in range(2, round(math.sqrt(n) + 1)):
+		if n % j == 0:
+			divisors.add(j)
+			divisors.add(n // j)
+	return sum(divisors) + 1
 
 def read_to_2d_list(filename, list):
 	with open(filename) as f:
