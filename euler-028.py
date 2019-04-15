@@ -10,4 +10,5 @@ def main():
 		n += i * 4
 	return total
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)
