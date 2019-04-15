@@ -27,6 +27,7 @@ def main():
 		if next_terms > terms:
 			n = i
 			terms = next_terms
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

@@ -4,6 +4,7 @@ import utilities
 import math
 
 def main():
-	print(sum([int(ch) for ch in str(math.factorial(100))]))
+	return sum([int(ch) for ch in str(math.factorial(100))])
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

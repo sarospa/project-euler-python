@@ -19,6 +19,7 @@ def main():
 			if n > largest_n:
 				largest_n = n
 				value = a * b
-	print(value)
+	return value
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

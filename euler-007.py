@@ -4,6 +4,7 @@ import utilities
 
 def main():
 	utilities.generate_primes(10000)
-	print(utilities.primes[10000])
+	return utilities.primes[10000]
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

@@ -17,6 +17,7 @@ def main():
 		j = sum_divisors(i)
 		if i != j and sum_divisors(j) == i:
 			n += i
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

@@ -21,6 +21,7 @@ def main():
 		if cycle > longest_cycle:
 			longest_cycle = cycle
 			value = i
-	print(value)
+	return value
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

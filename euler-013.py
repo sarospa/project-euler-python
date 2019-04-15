@@ -7,6 +7,7 @@ def main():
 	with open("euler-013-data.txt") as f:
 		for line in f.readlines():
 			nums.append(int(line))
-	print(str(sum(nums))[0:10])
+	return str(sum(nums))[0:10]
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

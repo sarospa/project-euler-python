@@ -10,6 +10,7 @@ def main():
 		f2 = f1 + f2
 		f1 = f2 - f1
 		index += 1
-	print(index)
+	return index
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

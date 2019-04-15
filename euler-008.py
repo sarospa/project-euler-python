@@ -12,6 +12,7 @@ def main():
 			val = val * int(large_num[j])
 		if val > n:
 			n = val
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

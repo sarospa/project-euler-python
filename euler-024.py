@@ -4,6 +4,7 @@ import utilities
 import itertools
 
 def main():
-	print(''.join(list(itertools.permutations("0123456789"))[999999]))
+	return ''.join(list(itertools.permutations("0123456789"))[999999])
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

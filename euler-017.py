@@ -23,6 +23,7 @@ def count_letters(n):
 	return 0
 
 def main():
-	print(sum([count_letters(i) for i in range(1, 1001)]))
+	return sum([count_letters(i) for i in range(1, 1001)])
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

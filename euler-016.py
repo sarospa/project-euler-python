@@ -3,6 +3,7 @@
 import utilities
 
 def main():
-	print(sum([int(ch) for ch in str(2 ** 1000)]))
+	return sum([int(ch) for ch in str(2 ** 1000)])
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

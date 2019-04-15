@@ -16,6 +16,7 @@ def calc_paths(x, y):
 	return grid[y][x]
 
 def main():
-	print(calc_paths(20, 20))
+	return calc_paths(20, 20)
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

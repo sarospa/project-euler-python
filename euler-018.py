@@ -14,6 +14,7 @@ def main():
 			if j != len(triangle[i]) - 1 and triangle[i - 1][j] > max_val:
 				max_val = triangle[i - 1][j]
 			triangle[i][j] += max_val
-	print(max(triangle[len(triangle) - 1]))
+	return max(triangle[len(triangle) - 1])
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

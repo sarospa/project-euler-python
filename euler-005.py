@@ -12,6 +12,7 @@ def main():
 				temp_n = temp_n // j
 				temp_i = temp_i // j
 		n = n * temp_i
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

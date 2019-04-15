@@ -20,6 +20,7 @@ def main():
 		if month >= 12:
 			month = 0
 			year += 1
-	print(count)
+	return count
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

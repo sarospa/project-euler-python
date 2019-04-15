@@ -9,6 +9,7 @@ def main():
 			sum = i * j
 			if utilities.is_palindrome(sum) and sum > n:
 				n = sum
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

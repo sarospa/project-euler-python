@@ -7,7 +7,7 @@ def main():
 		for b in range(a, 1000 - a):
 			c = 1000 - (a + b)
 			if (a ** 2) + (b ** 2) == c ** 2:
-				print(a * b * c)
-				return
+				return a * b * c
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

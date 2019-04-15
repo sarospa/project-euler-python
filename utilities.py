@@ -3,6 +3,10 @@ import math
 
 primes = []
 
+# Resets all state within utilities.py, for testing purposes.
+def reset():
+	primes.clear()
+
 # n is the number of primes to generate.
 def generate_primes(n):
 	if len(primes) == 0:
@@ -10,7 +14,7 @@ def generate_primes(n):
 	else:
 		p = primes[len(primes) - 1]
 	count = 0
-	while count < n:
+	while count <= n:
 		is_prime = True
 		for i in range(0, len(primes)):
 			if p % primes[i] == 0:
@@ -23,6 +27,7 @@ def generate_primes(n):
 
 # generates all primes between 1 and n.
 def generate_primes_sieve(n):
+	primes.clear()
 	prime_sieve = [True] * n
 	prime_sieve[0] = False
 	prime_sieve[1] = False
@@ -60,6 +65,7 @@ def read_to_2d_list(filename, list):
 
 def print_runtime(func):
 	start_time = time.perf_counter()
-	func()
+	result = func()
 	runtime = time.perf_counter() - start_time
+	print(result)
 	print("Solved in %.3f seconds." % runtime)

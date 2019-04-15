@@ -4,6 +4,7 @@ import utilities
 
 def main():
 	utilities.generate_primes_sieve(2000000)
-	print(sum(utilities.primes))
+	return sum(utilities.primes)
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)

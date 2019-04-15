@@ -16,6 +16,7 @@ def main():
 				divisors.add(n // j)
 		divisor_count = len(divisors)
 		i = i + 1
-	print(n)
+	return n
 
-utilities.print_runtime(main)
+if __name__ == "__main__":
+	utilities.print_runtime(main)
