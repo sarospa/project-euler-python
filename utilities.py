@@ -42,6 +42,9 @@ def triangle(n):
 				
 def pentagon(n):
 	return (n * (3 * n - 1)) // 2
+
+def hexagon(n):
+	return n * (2 * n - 1)
 	
 def is_palindrome(val):
 	str_val = str(val)
