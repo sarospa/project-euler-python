@@ -5,7 +5,7 @@ import utilities
 triangle = []
 
 def main():
-	utilities.read_to_2d_list("euler-018-data.txt", triangle)
+	triangle = utilities.read_to_2d_list("euler-018-data.txt")
 	for i in range(1, len(triangle)):
 		for j in range(len(triangle[i])):
 			max_val = 0

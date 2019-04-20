@@ -16,13 +16,17 @@ for test in tests:
 	utilities.reset()
 	solution = importlib.import_module("euler-" + str(test[0]))
 	start_time = time.perf_counter()
-	result = solution.main()
-	runtime = time.perf_counter() - start_time
-	test.append(runtime)
-	if str(result) == test[1]:
-		outcome = "PASS - took %.3f seconds" % runtime
-	else:
-		outcome = ("FAIL - expected %s, got %s" % (test[1], str(result)))
+	try:
+		result = solution.main()
+		runtime = time.perf_counter() - start_time
+		test.append(runtime)
+		if str(result) == test[1]:
+			outcome = "PASS - took %.3f seconds" % runtime
+		else:
+			outcome = ("FAIL - expected %s, got %s" % (test[1], str(result)))
+			all_pass = False
+	except:
+		outcome = "EXCEPTION"
 		all_pass = False
 	print("Problem " + test[0] + ": " + outcome)
 if all_pass:

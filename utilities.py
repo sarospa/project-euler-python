@@ -61,13 +61,15 @@ def sum_divisors(n):
 			divisors.add(n // j)
 	return sum(divisors) + 1
 
-def read_to_2d_list(filename, list):
+def read_to_2d_list(filename):
+	list = []
 	with open(filename) as f:
 		for line in f.readlines():
 			dataline = []
 			for num in line.split():
 				dataline.append(int(num))
 			list.append(dataline)
+	return list
 
 def print_runtime(func):
 	start_time = time.perf_counter()
