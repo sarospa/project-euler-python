@@ -37,6 +37,14 @@ def generate_primes_sieve(n):
 			for j in range(i, n, i):
 				prime_sieve[j] = False
 
+def is_prime(n):
+	for p in primes:
+		if n == p or p * p > n:
+			return True
+		elif n % p == 0:
+			return False
+	return True
+
 def triangle(n):
 	return (n * (n + 1)) // 2
 				
