@@ -47,13 +47,22 @@ def is_prime(n):
 
 def triangle(n):
 	return (n * (n + 1)) // 2
-				
+
+def square(n):
+	return n ** 2
+	
 def pentagon(n):
 	return (n * (3 * n - 1)) // 2
 
 def hexagon(n):
 	return n * (2 * n - 1)
-	
+
+def heptagon(n):
+	return (n * (5 * n - 3)) // 2
+
+def octagon(n):
+	return n * (3 * n - 2)
+
 def is_palindrome(val):
 	str_val = str(val)
 	for i in range(0, len(str_val) // 2):
@@ -68,6 +77,9 @@ def sum_divisors(n):
 			divisors.add(j)
 			divisors.add(n // j)
 	return sum(divisors) + 1
+
+def flatten(list):
+	return [item for sublist in list for item in sublist]
 
 def read_to_2d_list(filename):
 	list = []
