@@ -1,6 +1,5 @@
 # Solution to https://projecteuler.net/problem=69
 
-import math
 import utilities
 
 def main():
