@@ -6,7 +6,7 @@ matrix = []
 cache = []
 
 def main():
-	with open("euler-081-data.txt") as f:
+	with open("euler-082-data.txt") as f:
 		for line in f.readlines():
 			dataline = []
 			for num in line.split(","):
