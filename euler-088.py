@@ -1,9 +1,7 @@
 # Solution to https://projecteuler.net/problem=88
 
-import copy
 import functools
 import itertools
-import math
 import operator
 import utilities
 
