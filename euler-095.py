@@ -1,22 +1,9 @@
 # Solution to https://projecteuler.net/problem=95
 
-import itertools
 import math
 import utilities
 
 MAX = 1000000
-
-def divisor_sum(n):
-	total = 1
-	root = int(math.sqrt(n))
-	if root**2 == n:
-		total += root
-	for i in range(2, root):
-		if n % i == 0:
-			total += i
-			if n // i != i:
-				total += n // i
-	return total
 
 def divisor_sieve(n):
 	sieve = [1] * (n + 1)
