@@ -81,6 +81,14 @@ def sum_divisors(n):
 def flatten(list):
 	return [item for sublist in list for item in sublist]
 
+def sign(n):
+	if n < 0:
+		return -1
+	elif n > 0:
+		return 1
+	else:
+		return 0
+
 def read_to_2d_list(filename):
 	list = []
 	with open(filename) as f:
