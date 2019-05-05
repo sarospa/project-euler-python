@@ -1,3 +1,5 @@
+import functools
+import operator
 import time
 import math
 
@@ -88,6 +90,9 @@ def sign(n):
 		return 1
 	else:
 		return 0
+
+def product(nums):
+	return functools.reduce(operator.mul, nums, 1)
 
 def read_to_2d_list(filename):
 	list = []
