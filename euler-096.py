@@ -15,13 +15,17 @@ def solve_sudoku(sudoku, start_row, start_col):
 	for i in range(start_row, len(sudoku)):
 		for j in range((start_col if i == start_row else 0), len(sudoku[0])):
 			if sudoku[i][j] == 0:
-				for n in [num for num in range(1, 10) if num not in sudoku[i] and num not in get_col(sudoku, j) and num not in get_block(sudoku, i, j)]:
-					sudoku_copy = copy.deepcopy(sudoku)
-					sudoku_copy[i][j] = n
-					sudoku_copy = solve_sudoku(sudoku_copy, i, j)
-					if sudoku_copy is not None:
-						return sudoku_copy
-				return None
+				valid_nums = [num for num in range(1, 10) if num not in sudoku[i] and num not in get_col(sudoku, j) and num not in get_block(sudoku, i, j)]
+				if len(valid_nums) == 1:
+					sudoku[i][j] = valid_nums[0]
+				else:
+					for n in valid_nums:
+						sudoku_copy = copy.deepcopy(sudoku)
+						sudoku_copy[i][j] = n
+						sudoku_copy = solve_sudoku(sudoku_copy, i, j)
+						if sudoku_copy is not None:
+							return sudoku_copy
+					return None
 	return sudoku
 
 def main():
