@@ -1,4 +1,5 @@
 import functools
+import itertools
 import operator
 import time
 import math
@@ -93,6 +94,10 @@ def sign(n):
 
 def product(nums):
 	return functools.reduce(operator.mul, nums, 1)
+
+def powerset(iterable):
+    s = list(iterable)
+    return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
 
 def read_to_2d_list(filename):
 	list = []
