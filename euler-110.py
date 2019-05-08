@@ -1,10 +1,10 @@
-# Solution to https://projecteuler.net/problem=108
+# Solution to https://projecteuler.net/problem=110
 
 import itertools
 import math
 import utilities
 
-TARGET = 1000
+TARGET = 4000000
 
 def gen_from_sq_factors(factors):
 	return utilities.product([utilities.primes[index]**((count - 1) // 2) for index, count in enumerate(factors)])
