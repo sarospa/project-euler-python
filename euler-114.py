@@ -1,4 +1,4 @@
-# Solution to 
+# Solution to https://projecteuler.net/problem=114
 
 import utilities
 
