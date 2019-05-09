@@ -41,6 +41,8 @@ def generate_primes_sieve(n):
 				prime_sieve[j] = False
 
 def is_prime(n):
+	if n < 2:
+		return False
 	for p in primes:
 		if n == p or p * p > n:
 			return True
