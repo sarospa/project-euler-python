@@ -4,7 +4,7 @@ import utilities
 
 prime_set = set()
 
-def radicals(n):
+def radical(n):
 	total = 1
 	for p in utilities.primes:
 		if n in prime_set:
@@ -21,7 +21,7 @@ def main():
 	global prime_set
 	utilities.generate_primes_sieve(100000)
 	prime_set = set(utilities.primes)
-	return sorted([(radicals(n), n) for n in range(1, 100001)])[9999][1]
+	return sorted([(radical(n), n) for n in range(1, 100001)])[9999][1]
 
 if __name__ == "__main__":
 	utilities.print_runtime(main)
