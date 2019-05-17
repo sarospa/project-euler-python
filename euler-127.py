@@ -15,7 +15,7 @@ def prime_factors(n):
 			factors.add(n)
 			return factors
 		if p * p > n:
-			return factors
+			break
 		if n % p == 0:
 			factors.add(p)
 			while n % p == 0:
@@ -35,10 +35,15 @@ def main():
 	factors_cache.sort()
 	for i in range(len(factors_cache)):
 		term_index[factors_cache[i][2]] = i
+	prev_prod = -1
 	for a in factors_cache:
+		factors_prod = a[0]
+		if factors_prod != prev_prod:
+			b_list = [b for b in factors_cache[factors_cache.index(a) + 1:] if a[0] * b[0] < MAX and len(a[1] | b[1]) == len(a[1]) + len(b[1])]
+			prev_prod = factors_prod
 		if a[0]**2 >= MAX:
 			break
-		for b in factors_cache[factors_cache.index(a) + 1:]:
+		for b in b_list:
 			if a[0] * b[0] >= MAX:
 				break
 			if a[2] + b[2] >= MAX:
