@@ -20,8 +20,6 @@ def main():
 	hits = set()
 	sieve = divisor_sieve(MAX)
 	for d in range(len(sieve)):
-		# if d % 1000 == 0:
-			# print(d)
 		sq_sieve = {num for num in {utils.product(pair) for pair in itertools.product(sieve[d], repeat=2)} | sieve[d] if num > d and num < MAX}
 		for q in sq_sieve:
 			r = d**2 // q
