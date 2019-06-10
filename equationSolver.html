@@ -1,0 +1,349 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	var funcs = {"SQRT":Math.sqrt, "SIN":Math.sin, "ARCSIN":Math.asin};
+	var variables = {"π":Math.PI};
+
+	function isAlgVar(chr)
+	{
+		return "abcdefghijklmnopqrstuvwxyz".indexOf(chr) !== -1;
+	}
+	
+	function isFuncLetter(chr)
+	{
+		return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(chr) !== -1;
+	}
+
+	function isNumber(chr)
+	{
+		return "0123456789".indexOf(chr) !== -1
+	}
+	
+	function add(a, b)
+	{
+		return a + b;
+	}
+	
+	function sub(a, b)
+	{
+		return a - b;
+	}
+	
+	function mul(a, b)
+	{
+		return a * b;
+	}
+	
+	function div(a, b)
+	{
+		return a / b;
+	}
+	
+	function processStep(tokens, funcs)
+	{
+		curValue = null;
+		opFunc = null;
+		nextStep = [];
+		for (var i = 0; i < tokens.length; i++)
+		{
+			if (typeof tokens[i] === "number")
+			{
+				if (curValue !== null && opFunc !== null)
+				{
+					curValue = opFunc(curValue, tokens[i]);
+					opFunc = null;
+				}
+				else
+				{
+					curValue = tokens[i];
+				}
+			}
+			else
+			{
+				if (tokens[i] in funcs) opFunc = funcs[tokens[i]];
+				else
+				{
+					nextStep.push(curValue);
+					nextStep.push(tokens[i]);
+					opFunc = null;
+					curValue = null;
+				}
+			}
+		}
+		nextStep.push(curValue);
+		return nextStep;
+	}
+	
+	function solveEquation(tokens)
+	{
+		if (tokens === null) return null;
+		
+		var parenStep = [];
+		for (var i = 0; i < tokens.length; i++)
+		{
+			if (tokens[i] !== "(")
+			{
+				parenStep.push(tokens[i]);
+			}
+			else
+			{
+				i++;
+				subTokens = []
+				parenCount = 0;
+				while ((tokens[i] !== ")" || parenCount > 0) && i < tokens.length)
+				{
+					if (tokens[i] === "(") parenCount++;
+					else if (tokens[i] === ")") parenCount--;
+					subTokens.push(tokens[i]);
+					i++;
+				}
+				if (i >= tokens.length) return null;
+				
+				subEquation = solveEquation(subTokens);
+				for (var j = 0; j < subEquation.length; j++)
+				{
+					parenStep.push(subEquation[j]);
+				}
+			}
+		}
+		
+		var funcStep = [];
+		for (var i = 0; i < parenStep.length; i++)
+		{
+			if (parenStep[i] in funcs)
+			{
+				funcStep.push(funcs[parenStep[i]](parenStep[i+1]));
+				i++;
+			}
+			else
+			{
+				funcStep.push(parenStep[i]);
+			}
+		}
+		
+		var powerStep = processStep(funcStep, {"^":Math.pow});
+		var mulDivStep = processStep(powerStep, {"*":mul, "/":div});
+		var addSubStep = processStep(mulDivStep, {"+":add, "-":sub});
+		return addSubStep;
+	}
+	
+	function tokenize(equation)
+	{
+		algVar = null
+		expression = "";
+		numComplete = false;
+		for (var i = 0; i < equation.length; i++)
+		{
+			if (algVar === null)
+			{
+				if (isAlgVar(equation[i]) && equation[i+1] === "=")
+				{
+					algVar = equation[i];
+					i++;
+				}
+				else
+				{
+					equation = equation.substring(i);
+					break;
+				}
+			}
+			else
+			{
+				if (equation[i] === "|")
+				{
+					variables[algVar] = solveEquation(tokenize(expression))[0]
+					
+					algVar = null;
+					number = "";
+					numComplete = false;
+					decimalExists = false;
+				}
+				else
+				{
+					expression += equation[i];
+				}
+			}
+		}
+		tokens = [];
+		var number = "";
+		var numComplete = false;
+		var decimalExists = false;
+		var lastTokenType = "paren";
+		var parenCount = 0;
+		for (var i = 0; i < equation.length; i++)
+		{
+			if (equation[i] === "-")
+			{
+				if (lastTokenType === "paren" || lastTokenType === "op")
+				{
+					tokens.push(-1);
+					lastTokenType = "var";
+				}
+				else if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					tokens.push(equation[i]);
+					lastTokenType = "op";
+					number = "";
+					decimalExists = false;
+				}
+				else if (lastTokenType === "var")
+				{
+					tokens.push(equation[i]);
+					lastTokenType = "op";
+				}
+				else
+				{
+					return null;
+				}
+			}
+			else if (equation[i] === ".")
+			{
+				if (lastTokenType === "number" && numComplete && !decimalExists)
+				{
+					number += equation[i];
+					numComplete = false;
+					decimalExists = true;
+				}
+				else
+				{
+					return null;
+				}
+			}
+			else if ("+/*^".indexOf(equation[i]) !== -1)
+			{
+				if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					tokens.push(equation[i]);
+					lastTokenType = "op";
+					number = "";
+					decimalExists = false;
+				}
+				else if (lastTokenType === "var")
+				{
+					tokens.push(equation[i]);
+					lastTokenType = "op";
+				}
+				else
+				{
+					return null;
+				}
+			}
+			else if (equation[i] === "(")
+			{
+				if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					tokens.push("*");
+					number = "";
+					decimalExists = false;
+				}
+				else if (lastTokenType === "var")
+				{
+					tokens.push("*");
+				}
+				tokens.push(equation[i]);
+				lastTokenType = "paren";
+				parenCount++;
+			}
+			else if (equation[i] === ")")
+			{
+				if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					number = "";
+					decimalExists = false;
+				}
+				else if (lastTokenType === "paren" || lastTokenType === "op" || lastTokenType === "func") return null;
+				
+				tokens.push(equation[i]);
+				lastTokenType = "var";
+				parenCount--;
+			}
+			else if (isFuncLetter(equation[i]))
+			{
+				if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					tokens.push("*");
+					number = "";
+					decimalExists = false;
+				}
+				else if (lastTokenType === "var")
+				{
+					tokens.push("*");
+				}
+				var funcName = "";
+				while (isFuncLetter(equation[i]))
+				{
+					funcName += equation[i];
+					i++;
+				}
+				i--;
+				if (!funcName in funcs) return null;
+				tokens.push(funcName);
+				lastTokenType = "func";
+			}
+			else if (isNumber(equation[i]))
+			{
+				if (lastTokenType === "var") tokens.push("*");
+				number += equation[i];
+				numComplete = true;
+				lastTokenType = "number";
+			}
+			else if (equation[i] in variables)
+			{
+				if (lastTokenType === "var")
+				{
+					tokens.push("*");
+				}
+				else if (lastTokenType === "number")
+				{
+					if (!numComplete) return null;
+					tokens.push(parseFloat(number));
+					tokens.push("*");
+					number = "";
+					decimalExists = false;
+				}
+				var value = variables[equation[i]];
+				tokens.push(value);
+				lastTokenType = "var";
+			}
+			else
+			{
+				return null
+			}
+		}
+		if (parenCount !== 0) return null;
+		
+		if (lastTokenType === "number" && numComplete)
+		{
+			tokens.push(parseFloat(number));
+			return tokens;
+		}
+		else if (lastTokenType === "var")
+		{
+			return tokens;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	$(document).ready(function()
+	{
+		$("#equation").on("input", function()
+		{
+			var solution = solveEquation(tokenize($("#equation").val().replace(/\s+/g, '')));
+			$("#answer").text(solution);
+		})
+	})
+</script>
+<textarea id="equation" style="width:100%" rows=5></textarea>
+<label id="answer"></label>
