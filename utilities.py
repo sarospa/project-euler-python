@@ -5,6 +5,7 @@ import time
 import math
 
 primes = []
+prime_set = set()
 
 # Resets all state within utilities.py, for testing purposes.
 def reset():
@@ -30,19 +31,25 @@ def generate_primes(n):
 
 # generates all primes between 1 and n.
 def generate_primes_sieve(n):
+	global prime_set
 	primes.clear()
-	prime_sieve = [True] * n
-	prime_sieve[0] = False
+	primes.append(2)
+	primes.append(3)
+	primes.append(5)
+	prime_sieve = [False, True, False, False, False, False, False, True, False, False, False, True, False, True, False, False, False, True, False, True, False, False, False, True, False, False, False, False, False, True] * (n // 30 + 1)
 	prime_sieve[1] = False
-	for i in range(1, n):
+	for i in range(7, n):
 		if prime_sieve[i]:
 			primes.append(i)
 			for j in range(i, n, i):
 				prime_sieve[j] = False
+	prime_set = set(primes)
 
 def is_prime(n):
 	if n < 2:
 		return False
+	if n <= primes[-1]:
+		return n in primes
 	for p in primes:
 		if n == p or p * p > n:
 			return True
