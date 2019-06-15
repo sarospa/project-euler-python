@@ -41,9 +41,8 @@ def main():
 		hits = {n for n in range(p) if p - (n**2 % p) not in mod_targets or n**2 + (p - (n**2 % p)) == p}
 		candidates = {candidate for candidate in candidates if candidate % p in hits}
 	total = 0
-	for n in sorted(candidates):
+	for n in candidates:
 		if is_prime_targets(n**2, targets) and not is_any_prime_targets(n**2, antitargets):
-			print(n)
 			total += n
 	return total
 
