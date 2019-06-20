@@ -30,20 +30,25 @@ def generate_primes(n):
 		p = p + 1
 
 # generates all primes between 1 and n.
-def generate_primes_sieve(n):
+def generate_primes_sieve(n, include_list=True, include_set=True):
 	global prime_set
 	primes.clear()
 	primes.append(2)
 	primes.append(3)
 	primes.append(5)
+	prime_set.add(2)
+	prime_set.add(3)
+	prime_set.add(5)
 	prime_sieve = [False, True, False, False, False, False, False, True, False, False, False, True, False, True, False, False, False, True, False, True, False, False, False, True, False, False, False, False, False, True] * (n // 30 + 1)
 	prime_sieve[1] = False
 	for i in range(7, n):
 		if prime_sieve[i]:
-			primes.append(i)
+			if include_list:
+				primes.append(i)
+			if include_set:
+				prime_set.add(i)
 			for j in range(i, n, i):
 				prime_sieve[j] = False
-	prime_set = set(primes)
 
 def is_prime(n):
 	if n < 2:
