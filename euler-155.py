@@ -20,11 +20,9 @@ def serial(cap_1, cap_2):
 def main():
 	values = dict()
 	start_val = (60, 1)
-	print(start_val)
 	values[1] = {start_val}
 	all_values = {start_val}
 	for i in range(2, MAX + 1):
-		print(i)
 		values[i] = set()
 		for j in range(1, (i // 2) + 1):
 			for cap_1 in values[j]:
