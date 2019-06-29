@@ -6,6 +6,7 @@ import math
 
 primes = []
 prime_set = set()
+lagged_fib_cache = [0]
 
 # Resets all state within utilities.py, for testing purposes.
 def reset():
@@ -112,6 +113,15 @@ def product(nums):
 def powerset(iterable):
     s = list(iterable)
     return itertools.chain.from_iterable(itertools.combinations(s, r) for r in range(len(s)+1))
+
+def lagged_fibonacci(n):
+	while n > 0:
+		n -= 1
+		k = len(lagged_fib_cache)
+		if k <= 55:
+			lagged_fib_cache.append(((100003 - 200003*k + 300007*k**3) % 1000000) - 500000)
+		else:
+			lagged_fib_cache.append(((lagged_fib_cache[k - 24] + lagged_fib_cache[k - 55] + 1000000) % 1000000) - 500000)
 
 def read_to_2d_list(filename):
 	list = []
