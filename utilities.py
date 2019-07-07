@@ -7,6 +7,7 @@ import math
 primes = []
 prime_set = set()
 lagged_fib_cache = [0]
+linear_con_cache = [0]
 
 # Resets all state within utilities.py, for testing purposes.
 def reset():
@@ -123,6 +124,12 @@ def lagged_fibonacci(n):
 		else:
 			lagged_fib_cache.append(((lagged_fib_cache[k - 24] + lagged_fib_cache[k - 55] + 1000000) % 1000000) - 500000)
 
+def linear_congruential(n):
+	t = 0
+	for n in range(1, n + 1):
+		t = (615949*t + 797807) % 2**20
+		linear_con_cache.append(t - 2**19)
+			
 def read_to_2d_list(filename):
 	list = []
 	with open(filename) as f:
