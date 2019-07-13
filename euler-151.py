@@ -1,6 +1,5 @@
 # Solution to https://projecteuler.net/problem=151
 
-import random
 import utilities as utils
 
 def main():
